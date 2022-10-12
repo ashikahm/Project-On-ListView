@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PersonInfo.ViewModel"
+             xmlns:helpers="clr-namespace:PersonInfo.Helpers"
+             x:Class="PersonInfo.View.ViewInformation">
+    <ContentPage.BindingContext>
+        <local:methodCall/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+                <On Platform="105" Value="Material Design Icons" />
+                <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons"/>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding GetInfo}" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+
+                            <Frame BorderColor="DarkBlue" Padding="10" Margin="20" CornerRadius="10">
+                                <StackLayout>
+                                    <Image Source="{Binding imageUrl}" HeightRequest="300" WidthRequest="300"/>
+                                    <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
+                                    <Label Text="{Binding Description}"  HorizontalOptions="Center" TextColor="Black"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
+
+                                        <ImageButton Source="{FontImage
+                                                FontFamily={StaticResource MaterialFontFamily},
+                                                Glyph={x:Static helpers:IconFont.Twitter},
+                                                Color=Blue,Size=30}" BackgroundColor="Transparent" Clicked="ImageButton_Clicked" CommandParameter="{Binding twitterUrl}"/>
+                                        <ImageButton Source="{FontImage
+                                                FontFamily={StaticResource MaterialFontFamily},
+                                                Glyph={x:Static helpers:IconFont.Facebook},
+                                                Color=Blue,Size=30}" BackgroundColor="Transparent" Clicked="ImageButton_Clicked" CommandParameter="{Binding facebookUrl}"/>
+                                        <ImageButton Source="{FontImage
+                                                FontFamily={StaticResource MaterialFontFamily},
+                                                Glyph={x:Static helpers:IconFont.Instagram},
+                                                Color=HotPink,Size=30}" BackgroundColor="Transparent" Clicked="ImageButton_Clicked" CommandParameter="{Binding instagramUrl}" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
